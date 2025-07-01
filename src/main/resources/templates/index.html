@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Acasă</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <style>
+        body {
+            background: rgb(2,0,36);
+            background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(92,135,126,1) 35%, rgba(0,168,255,1) 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        a, label {
+            color: white;
+        }
+
+        .form-control {
+            background-color: #5c877e;
+            color: white;
+        }
+
+        .form-control::placeholder {
+            color: #d9d9d9;
+        }
+
+        .btn-primary {
+            background-color: #497167;
+            border-color: #497167;
+        }
+
+        .btn-primary:hover {
+            background-color: #365a4e;
+            border-color: #365a4e;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Bun venit!</h1>
+    <p class="text-center">Conectează-te pentru a accesa lista.</p>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="username">Nume utilizator</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="password">Parolă</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-4">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Afișare mesaje de eroare -->
+    <div class="row justify-content-center mt-4" th:if="${error}">
+        <div class="col-md-6">
+            <div class="alert alert-danger text-center">
+                [[${error}]]
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

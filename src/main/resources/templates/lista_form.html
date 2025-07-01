@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>[[${pageTitle}]]</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  <style>
+    body {
+      background: rgb(2,0,36);
+      background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(92,135,126,1) 35%, rgba(0,168,255,1) 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2 {
+      color: white;
+    }
+
+    .form-control {
+      background-color: #5c877e;
+      color: white;
+    }
+
+    .form-control::placeholder {
+      color: #d9d9d9;
+    }
+
+    .btn-primary {
+      background-color: #497167;
+      border-color: #497167;
+    }
+
+    .btn-primary:hover {
+      background-color: #365a4e;
+      border-color: #365a4e;
+    }
+
+    .btn-secondary {
+      background-color: #7a7a7a;
+      border-color: #7a7a7a;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a5a5a;
+      border-color: #5a5a5a;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="text-center"><h2>[[${pageTitle}]]</h2></div>
+
+  <form th:action="@{/lista/save}" method="post" th:object="${lista}" style="max-width: 500px; margin: 0 auto;">
+    <input type="hidden" th:field="*{id}">
+    <div class="border border-secondary rounded p-3">
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Nume:</label>
+        <div class="col-sm-8">
+          <input type="text" th:field="*{nume}" class="form-control" required minlength="2" maxlength="100"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Preț:</label>
+        <div class="col-sm-8">
+          <input type="number" step="0.01" th:field="*{pret}" class="form-control" required/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Prioritate:</label>
+        <div class="col-sm-8">
+          <input type="number" th:field="*{prioritate}" class="form-control" required min="1" max="5"/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Categorie:</label>
+        <div class="col-sm-8">
+          <input type="text" th:field="*{categorie}" class="form-control" maxlength="50" />
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary m-2">Salvează</button>
+        <button type="button" class="btn btn-secondary m-2" onclick="cancelForm()">Anulează</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/javascript">
+  function cancelForm() {
+    window.location = "[[@{/lista}]]";
+  }
+</script>
+</body>
+</html>

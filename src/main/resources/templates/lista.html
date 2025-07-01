@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Editare listă</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  <style>
+    body {
+      background: rgb(2,0,36);
+      background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(92,135,126,1) 35%, rgba(0,168,255,1) 100%);
+      color: white;
+    }
+
+    table {
+      background-color: #5c877e;
+      color: white;
+    }
+
+    th, td {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    thead {
+      background-color: #497167;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .alert-success {
+      color: #155724;
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #5c877e;
+      min-width: 150px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 10px 12px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #497167;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div class="container-fluid text-center">
+  <div><h2>Administrare lista</h2></div>
+  <div class="m-2">
+    <a class="h3" th:href="@{/lista/new}">Adaugă un obiect nou</a>
+  </div>
+
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+
+  <div>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nume</th>
+        <th>
+          <div class="dropdown">
+            Prioritate
+            <div class="dropdown-content">
+              <a th:href="@{/lista(field='prioritate', direction='asc')}">Crescător</a>
+              <a th:href="@{/lista(field='prioritate', direction='desc')}">Descrescător</a>
+            </div>
+          </div>
+          </th>
+          <th>
+          <div class="dropdown">
+            Preț
+            <div class="dropdown-content">
+              <a th:href="@{/lista(field='pret', direction='asc')}">Crescător</a>
+              <a th:href="@{/lista(field='pret', direction='desc')}">Descrescător</a>
+            </div>
+          </div>
+         </th>
+        <th>Categorie</th>
+        <th>Acțiuni</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="item : ${listItems}">
+        <tr>
+          <td>[[${item.id}]]</td>
+          <td>[[${item.nume}]]</td>
+          <td>[[${item.prioritate}]]</td>
+          <td>[[${item.pret}]]</td>
+          <td>[[${item.categorie}]]</td>
+          <td>
+            <a class="h4 mr-3" th:href="@{'/lista/edit/' + ${item.id}}">Editează</a>
+            <a class="h4" th:href="@{'/lista/delete/' + ${item.id}}" onclick="return confirm('Ești sigur că vrei să ștergi acest obiect?');">Șterge</a>
+          </td>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
