@@ -81,7 +81,7 @@ public class ListaController {
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, RedirectAttributes ra) {
-        if ("alexandra_paun".equals(username) && "andra1234".equals(password)) {
+        if ("myusername".equals(username) && "mypassword".equals(password)) {
             return "redirect:/lista" ;
         } else {
             ra.addFlashAttribute("error", "Nume de utilizator sau parolă incorectă.");
